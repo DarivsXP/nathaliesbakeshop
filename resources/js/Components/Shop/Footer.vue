@@ -1,7 +1,7 @@
 <script setup>
 import BrandLogo from '@/Components/Shop/BrandLogo.vue';
 import { Link } from '@inertiajs/vue3';
-import { Facebook, Instagram, Mail, MapPin } from 'lucide-vue-next';
+import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -36,6 +36,12 @@ import { Facebook, Instagram, Mail, MapPin } from 'lucide-vue-next';
                         <li class="flex items-start gap-2">
                             <MapPin class="mt-0.5 h-4 w-4 flex-shrink-0 text-gold" />
                             Québec, Canada
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <Phone class="h-4 w-4 text-gold" />
+                            <a href="tel:+15145550123" class="transition hover:text-white">
+                                (514) 555-0123
+                            </a>
                         </li>
                         <li class="flex items-center gap-2">
                             <Mail class="h-4 w-4 text-gold" />
