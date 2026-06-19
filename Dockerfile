@@ -10,6 +10,14 @@ RUN composer install \
     --optimize-autoloader \
     --no-scripts
 
+COPY . .
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --prefer-dist \
+    --optimize-autoloader \
+    --no-scripts
+
 FROM node:20-alpine AS frontend
 
 WORKDIR /app
@@ -24,8 +32,13 @@ RUN npm run build
 
 FROM richarvey/nginx-php-fpm:3.1.6
 
+WORKDIR /var/www/html
+
 COPY . .
-COPY --from=frontend /app/public/build /var/www/html/public/build
+COPY --from=vendor /app/vendor ./vendor
+COPY --from=frontend /app/public/build ./public/build
+
+RUN chmod +x /var/www/html/scripts/*.sh
 
 ENV SKIP_COMPOSER=1
 ENV WEBROOT=/var/www/html/public

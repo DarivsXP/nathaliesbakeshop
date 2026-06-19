@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Running composer..."
-composer install --no-dev --working-dir=/var/www/html
+cd /var/www/html
+
+if [ ! -f vendor/autoload.php ]; then
+    echo "Installing composer dependencies..."
+    composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+else
+    echo "Composer dependencies already present."
+fi
 
 echo "Fixing permissions..."
 chown -R nginx:nginx storage bootstrap/cache || chown -R www-data:www-data storage bootstrap/cache || true
