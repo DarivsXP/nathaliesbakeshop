@@ -4,14 +4,18 @@ set -e
 echo "Running composer..."
 composer install --no-dev --working-dir=/var/www/html
 
+echo "Fixing permissions..."
+chown -R nginx:nginx storage bootstrap/cache || chown -R www-data:www-data storage bootstrap/cache || true
+chmod -R 775 storage bootstrap/cache || true
+
 echo "Linking storage..."
 php artisan storage:link || true
 
+echo "Clearing cached config..."
+php artisan optimize:clear
+
 echo "Caching config..."
 php artisan config:cache
-
-echo "Caching routes..."
-php artisan route:cache
 
 echo "Running migrations..."
 php artisan migrate --force
