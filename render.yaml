@@ -34,9 +34,17 @@ services:
         value: "Nathalie's Bakeshop"
       - key: LOG_CHANNEL
         value: stderr
+      - key: LOG_LEVEL
+        value: error
       - key: SESSION_DRIVER
         value: database
       - key: CACHE_STORE
         value: database
       - key: QUEUE_CONNECTION
         value: database
+      - key: FILESYSTEM_DISK
+        value: local
+      - key: MAIL_MAILER
+        value: log
+      - key: VITE_APP_NAME
+        value: "Nathalie's Bakeshop"

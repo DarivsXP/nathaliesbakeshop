@@ -30,7 +30,18 @@ COPY --from=vendor /app/vendor ./vendor
 
 RUN npm run build
 
-FROM richarvey/nginx-php-fpm:3.1.6
+FROM php:8.3-cli-bookworm
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    unzip \
+    libpq-dev \
+    libzip-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /var/www/html
 
@@ -40,20 +51,6 @@ COPY --from=frontend /app/public/build ./public/build
 
 RUN chmod +x /var/www/html/scripts/*.sh
 
-ENV SKIP_COMPOSER=1
-ENV WEBROOT=/var/www/html/public
-ENV PHP_ERRORS_STDERR=1
-ENV RUN_SCRIPTS=1
-ENV REAL_IP_HEADER=1
-ENV APP_ENV=production
-ENV APP_DEBUG=false
-ENV LOG_CHANNEL=stderr
-ENV COMPOSER_ALLOW_SUPERUSER=1
+EXPOSE 8000
 
-CMD ["/start.sh"]
-
-COPY --from=vendor /app/vendor ./vendor
-
-RUN echo "Checking vendor folder..." && \
-    ls -la /var/www/html && \
-    ls -la /var/www/html/vendor
+CMD ["/var/www/html/scripts/docker-start.sh"]

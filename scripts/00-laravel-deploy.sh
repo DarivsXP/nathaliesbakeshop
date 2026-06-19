@@ -11,7 +11,6 @@ else
 fi
 
 echo "Fixing permissions..."
-chown -R nginx:nginx storage bootstrap/cache || chown -R www-data:www-data storage bootstrap/cache || true
 chmod -R 775 storage bootstrap/cache || true
 
 echo "Linking storage..."
@@ -28,3 +27,5 @@ php artisan migrate --force
 
 echo "Seeding database if empty..."
 php artisan tinker --execute="if (App\\Models\\Product::count() === 0) { Artisan::call('db:seed', ['--force' => true]); echo 'Seeded.'; } else { echo 'Already seeded.'; }"
+
+echo "Deploy script finished."
