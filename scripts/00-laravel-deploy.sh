@@ -26,6 +26,6 @@ echo "Caching config..."
 php artisan config:cache
 
 echo "Seeding database if empty..."
-php artisan tinker --execute="if (App\\Models\\Product::count() === 0) { Artisan::call('db:seed', ['--force' => true]); echo 'Seeded.'; } else { echo 'Already seeded.'; }"
+php artisan tinker --execute="if (App\\Models\\Product::count() === 0) { Artisan::call('db:seed', ['--force' => true]); echo PHP_EOL.'Seeded.'.PHP_EOL; } else { echo PHP_EOL.'Already seeded.'.PHP_EOL; }" || echo "Seed skipped or failed."
 
 echo "Deploy script finished."
