@@ -1,3 +1,15 @@
+FROM composer:2 AS vendor
+
+WORKDIR /app
+
+COPY composer.json composer.lock ./
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --prefer-dist \
+    --optimize-autoloader \
+    --no-scripts
+
 FROM node:20-alpine AS frontend
 
 WORKDIR /app
@@ -6,6 +18,8 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
+COPY --from=vendor /app/vendor ./vendor
+
 RUN npm run build
 
 FROM richarvey/nginx-php-fpm:3.1.6
