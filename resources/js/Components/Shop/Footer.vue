@@ -1,7 +1,7 @@
 <script setup>
 import BrandLogo from '@/Components/Shop/BrandLogo.vue';
 import { Link } from '@inertiajs/vue3';
-import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-vue-next';
+import { Facebook, Instagram, Mail, MapPin } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -35,15 +35,13 @@ import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-vue-next';
                     <ul class="space-y-3 text-sm text-white/70">
                         <li class="flex items-start gap-2">
                             <MapPin class="mt-0.5 h-4 w-4 flex-shrink-0 text-gold" />
-                            Greater Toronto Area, Ontario, Canada
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <Phone class="h-4 w-4 text-gold" />
-                            (416) 555-0123
+                            Québec, Canada
                         </li>
                         <li class="flex items-center gap-2">
                             <Mail class="h-4 w-4 text-gold" />
-                            hello@nathaliesbakeshop.ca
+                            <a href="mailto:nathaliesbakeshop@gmail.com" class="transition hover:text-white">
+                                nathaliesbakeshop@gmail.com
+                            </a>
                         </li>
                     </ul>
                     <div class="mt-4 flex gap-3">

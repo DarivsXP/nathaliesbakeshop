@@ -5,7 +5,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
-        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="icon" href="/logo.ico" sizes="any">
+        <link rel="shortcut icon" href="/logo.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="/logo.ico">
+
+        <meta name="description" content="Handcrafted Filipino delicacies and custom celebration cakes from Nathalie's Bakeshop in Québec, Canada.">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="{{ config('app.name', 'Nathalie\'s Bakeshop') }}">
+        <meta property="og:title" content="{{ config('app.name', 'Nathalie\'s Bakeshop') }}">
+        <meta property="og:description" content="Handcrafted Filipino delicacies and custom celebration cakes from Nathalie's Bakeshop in Québec, Canada.">
+        <meta property="og:image" content="{{ url('/logo.ico') }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ config('app.name', 'Nathalie\'s Bakeshop') }}">
+        <meta name="twitter:description" content="Handcrafted Filipino delicacies and custom celebration cakes from Nathalie's Bakeshop in Québec, Canada.">
+        <meta name="twitter:image" content="{{ url('/logo.ico') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
