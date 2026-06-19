@@ -51,3 +51,9 @@ ENV LOG_CHANNEL=stderr
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 CMD ["/start.sh"]
+
+COPY --from=vendor /app/vendor ./vendor
+
+RUN echo "Checking vendor folder..." && \
+    ls -la /var/www/html && \
+    ls -la /var/www/html/vendor
