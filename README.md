@@ -1,58 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Nathalie's Bakeshop
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack e-commerce website for a Filipino-Canadian home bakery based in Québec, Canada. Customers can browse the menu, add items to cart, place demo orders, and request custom cakes. An admin dashboard supports day-to-day shop management.
 
-## About Laravel
+**Live demo:** [nathaliesbakeshop.onrender.com](https://nathaliesbakeshop.onrender.com)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Overview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project was built as a portfolio piece demonstrating end-to-end web development: from database design and RESTful routing to a responsive storefront and a protected admin area. The brand focuses on Filipino baked goods—empanadas, ube pies, kakanin, and custom celebration cakes.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Storefront
+- Home page with featured products and brand story
+- Menu with category filters and search
+- Product detail pages with variant selection
+- Shopping cart (Pinia) with add-to-cart and buy-now flows
+- Demo checkout and order confirmation
+- Custom cake inquiry form with image upload
+- About and contact pages
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Admin dashboard
+- Product and category management (CRUD)
+- Order tracking and status updates
+- Custom cake inquiry review workflow
+- Role-based access (`admin` middleware)
 
-## Agentic Development
+### Engineering
+- SQLite for local development, PostgreSQL in production
+- Database migrations and seeders with sample catalog
+- PHPUnit feature tests (orders, inquiries, admin auth)
+- Docker deployment on Render (PHP 8.3)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
+
+## Tech stack
+
+| Layer | Technologies |
+|-------|----------------|
+| Backend | PHP 8.3, Laravel 13, Inertia.js |
+| Frontend | Vue 3, Tailwind CSS, Pinia, Vite |
+| Database | SQLite (local) / PostgreSQL (production) |
+| Auth | Laravel Breeze |
+| Deployment | Docker, Render |
+
+---
+
+## Getting started
+
+### Requirements
+- PHP 8.3+
+- Composer
+- Node.js 20+
+- SQLite (enabled in PHP)
+
+### Installation
 
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/DarivsXP/nathaliesbakeshop.git
+cd nathaliesbakeshop
 
-php artisan boost:install
+cp .env.example .env
+composer install
+npm install
+
+php artisan key:generate
+php artisan migrate --seed
+npm run build
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Run locally
 
-## Contributing
+```bash
+# Terminal 1
+php artisan serve
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Terminal 2
+npm run dev
+```
 
-## Code of Conduct
+Visit [http://localhost:8000](http://localhost:8000).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Demo admin login
 
-## Security Vulnerabilities
+| Field | Value |
+|-------|--------|
+| Email | `admin@nathaliesbakeshop.test` |
+| Password | `password` |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Admin panel: `/admin`
+
+### Run tests
+
+```bash
+php artisan test
+```
+
+---
+
+## Project structure
+
+```
+app/Http/Controllers/   # Shop, checkout, admin, and auth controllers
+resources/js/Pages/     # Inertia Vue pages (Shop, Admin, Auth)
+resources/js/Components/# Reusable UI (ProductCard, Navbar, Footer, etc.)
+database/migrations/    # Schema: products, orders, inquiries, categories
+database/seeders/       # Sample catalog and admin user
+routes/web.php          # Application routes
+```
+
+---
+
+## Deployment
+
+The app deploys to [Render](https://render.com) using Docker (PHP 8.3) and a managed PostgreSQL database. Configuration lives in `render.yaml` and `.env.render.example`.
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
